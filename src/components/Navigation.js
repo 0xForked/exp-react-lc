@@ -11,13 +11,12 @@ const TabItem = styled(Tab)`
 `;
 
 
-const LogoItem = styled(TabItem)`
-  margin-left: auto;
-
-  > svg {
-    height: 22px;
-  }
-`;
+// const LogoItem = styled(TabItem)`
+//   margin-left: auto;
+//   > svg {
+//     height: 22px;
+//   }
+// `;
 
 const navigationItems = Object.values(navigationItem)
 
@@ -37,9 +36,9 @@ const Navigation = () => {
           </TabItem>
         ))}
 
-        <LogoItem href="https://livechat.com/" target="_blank">
+        {/* <LogoItem href="https://livechat.com/" target="_blank">
           <LiveChatLogo />
-        </LogoItem>
+        </LogoItem> */}
       </TabsList>
 
     </TabsWrapper>

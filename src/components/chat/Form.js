@@ -14,6 +14,10 @@ const ChatForm = () => {
     setInputValue("");
   };
 
+  const sendRichMessage = e => {
+    console.log('test')
+  }
+
   return (
     <div style={{ 
       display: 'flex', 
@@ -22,7 +26,7 @@ const ChatForm = () => {
       marginTop: "20px"
     }}>
       <div style={{ flexBasis: '8%'}}>
-        <Button kind="primary" iconPosition="left">+</Button>
+        <Button kind="primary" iconPosition="left" onClick={sendRichMessage}>+</Button>
       </div>
       <div style={{ flexBasis: '92%'}}>
         <Form onSubmit={sendChatMessage} style={{ width: "100%" }}>
