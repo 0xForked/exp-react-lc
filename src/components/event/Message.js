@@ -8,6 +8,7 @@ const MessageWrapper = styled.div`
   align-items: center;
   justify-content: ${({ isCustomer }) =>
     isCustomer ? "flex-start" : "flex-end"};
+  margin-bottom: 16px;
 `;
 
 const MessageAuthor = styled.small`
@@ -23,6 +24,18 @@ const MessageText = styled.p`
   border-radius: 10px;
 `;
 
+const MessageDate = styled.small`
+  color: gray;
+  position: absolute;
+  bottom: -3px;
+`;
+
+function formatDate(date) {
+  const createdAt = new Date(date);
+  const hrs = `${createdAt.getHours() < 10 ? `0${createdAt.getHours()}` : createdAt.getHours()}`;
+  return `${hrs}:${createdAt.getMinutes()}`;
+}
+
 const Message = ({ message, user }) => {
   const userName = user?.name || "";
   const isCustomer = user?.type === "customer";
@@ -31,6 +44,7 @@ const Message = ({ message, user }) => {
     <MessageWrapper isCustomer={isCustomer}>
       <MessageAuthor>{userName}</MessageAuthor>
       <MessageText isCustomer={isCustomer}>{message.text}</MessageText>
+      <MessageDate>{formatDate(message.created_at)}</MessageDate>
     </MessageWrapper>
   );
 };

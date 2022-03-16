@@ -12,7 +12,7 @@ const Answer = styled.p`
 
 const FilledForm = ({ message }) => (
   <Wrapper>
-    <Card title="Survey:">
+    <Card>
       {message.fields.map(({ id, label, answer }) => (
         <Answer key={id}>
           <b>{label}</b> {answer?.label || answer}
