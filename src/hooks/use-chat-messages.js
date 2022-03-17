@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChatSDK, getChat } from "../utils/chat-sdk";
+import { ChatSDK, getChat, /* addUserToChat */ } from "../utils/chat-sdk";
 
 const getLastMessages = async (chatInfo) => {
   try {
@@ -42,6 +42,17 @@ export function useChatMessages() {
     const events = await getLastMessages(chatInfo)
     setMessages(events);
   }, [setActiveChat])
+
+  // const pickFromQueue = async (chat_id, user_id, user_type) => {
+  //   try {
+  //     const cb = await addUserToChat(chat_id, user_id, user_type)
+  //     console.log('callback add user')
+  //     console.log(cb)
+  //   } catch(error) {
+  //     console.log(`unable to add user to the chat`)
+  //     console.log(error)
+  //   }
+  // }
 
   /**
    * Handle events related to chat list
@@ -114,6 +125,7 @@ export function useChatMessages() {
 
   return {
     sendMessage,
+    // pickFromQueue,
     clearMessages,
     setMessages,
     messages,

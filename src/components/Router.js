@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavigationContext } from "../context/navigation";
 import { navigationItem } from "../constants";
 import Chats from "../containers/chats";
+import Queue from "../containers/queue";
 import ArchivedChats from "../containers/archive";
 import AgentDetails from "../containers/agentDetails";
 
@@ -12,13 +13,12 @@ const Router = () => {
   switch (activeTab) {
     case navigationItem.chats:
       return <Chats />
-
+    case navigationItem.queue:
+      return <Queue />
     case navigationItem.archive:
       return <ArchivedChats />
-
     case navigationItem.agent:
       return <AgentDetails />
-
     default:
       return null
   }

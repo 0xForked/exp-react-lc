@@ -9,6 +9,7 @@ export const theme = {
 
 export const navigationItem = {
   chats: 'Active chats',
+  queue: 'Queue',
   archive: 'Archive',
   agent: 'Agent details'
 }

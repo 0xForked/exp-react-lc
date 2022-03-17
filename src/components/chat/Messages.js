@@ -1,6 +1,7 @@
 import React, { useRef, useContext, useEffect } from "react";
 import styled from "@emotion/styled";
 import ChatForm from "./Form";
+import ButtonPickFromQueue from "./ButtonPickFromQueue";
 import Message from "./Message";
 import Instruction from "./Instruction";
 import { ChatContext } from '../../context/chat';
@@ -18,7 +19,7 @@ const MessageWrapper = styled.div`
   flex-grow: 1;
 `;
 
-const ChatMessages = ({ onlyMessages = false }) => {
+const ChatMessages = ({ onlyMessages = false, queueMessages = false }) => {
   const ref = useRef();
 
   const { messages, activeChat, chatList } = useContext(ChatContext)
@@ -41,11 +42,13 @@ const ChatMessages = ({ onlyMessages = false }) => {
 
   return (
     <Wrapper>
-      <MessageWrapper ref={ref} onlyMessages={onlyMessages}>
+      <MessageWrapper ref={ref} onlyMessages={onlyMessages} queueMessages={queueMessages} >
         {messages?.map(message => <Message key={message?.id} message={message} users={chatUsers} />)}
       </MessageWrapper>
 
       {!onlyMessages && <ChatForm chatId={activeChat?.id} />}
+      
+      {!queueMessages && <ButtonPickFromQueue chatId={activeChat?.id} />}
     </Wrapper>
   );
 };

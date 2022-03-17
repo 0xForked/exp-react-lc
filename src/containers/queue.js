@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "@emotion/styled";
-
 import List from "../components/chat/List";
 import Messages from "../components/chat/Messages";
-import { ChatContext } from '../context/chat';
+import { ChatContext } from "../context/chat";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,20 +11,20 @@ const Wrapper = styled.div`
   padding: 1rem;
 `;
 
-const ArchivedChats = () => {
-  const { getArchivedChats } = useContext(ChatContext)
+const Queue = () => {
+  const { getQueueChats } = useContext(ChatContext)
 
   useEffect(() => {
-    getArchivedChats()
+    getQueueChats()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <Wrapper>
       <List />
-      <Messages onlyMessages queueMessages />
+      <Messages onlyMessages />
     </Wrapper>
-  );
+  )
 };
 
-export default ArchivedChats;
+export default Queue;

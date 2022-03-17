@@ -22,7 +22,7 @@ const Chats = () => {
   return (
     <Wrapper>
       <List />
-      <Messages />
+      <Messages queueMessages />
     </Wrapper>
   )
 };

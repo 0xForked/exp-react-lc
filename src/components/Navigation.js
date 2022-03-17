@@ -3,20 +3,11 @@ import { TabsWrapper, TabsList, Tab } from "@livechat/design-system";
 import styled from "@emotion/styled";
 import { NavigationContext } from "../context/navigation";
 import { navigationItem } from "../constants";
-import { ReactComponent as LiveChatLogo } from "../assets/livechat-logo.svg";
 
 const TabItem = styled(Tab)`
   margin-top: 0.5rem;
   padding: 0.5rem 1.5rem;
 `;
-
-
-// const LogoItem = styled(TabItem)`
-//   margin-left: auto;
-//   > svg {
-//     height: 22px;
-//   }
-// `;
 
 const navigationItems = Object.values(navigationItem)
 
@@ -35,12 +26,7 @@ const Navigation = () => {
             {item}
           </TabItem>
         ))}
-
-        {/* <LogoItem href="https://livechat.com/" target="_blank">
-          <LiveChatLogo />
-        </LogoItem> */}
       </TabsList>
-
     </TabsWrapper>
   )
 };
