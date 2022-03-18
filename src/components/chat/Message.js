@@ -1,5 +1,12 @@
 import React from "react";
-import { Message, SystemMessage, FilledForm, CustomMessage } from '../event'
+import { 
+  Message,
+  SystemMessage, 
+  FilledForm, 
+  CustomMessage,
+  OrderMessage,
+  ProductMessage
+} from '../event'
 
 
 const canParseJsonData = (str) => {
@@ -14,7 +21,20 @@ const ChatMessage = ({ users, message }) => {
 
   switch (message?.type) {
     case "message":
+    case "custom": 
       const user = getChatUser(message.author_id);
+
+      if (message.type === 'custom') {
+        if (message.content.type === 'order') {
+          return <OrderMessage key={message.id} message={message} user={user} />
+        }
+
+        if (message.content.type === 'product') {
+          return <ProductMessage key={message.id} message={message} user={user} />
+        }
+
+        return <div>{JSON.stringify(message.id)}</div>;
+      }
 
       if (!canParseJsonData(message?.text)) {
         return (
