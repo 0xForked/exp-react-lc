@@ -8,7 +8,8 @@ const MessageWrapper = styled.div`
   align-items: center;
   justify-content: ${({ isCustomer }) =>
     isCustomer ? "flex-start" : "flex-end"};
-  margin-bottom: "26px";
+  margin-bottom: ${({ isText }) =>
+  isText ? "26px" : "36px"};
   margin-top: ${({ isText }) =>
   isText ? "26px" : "36px"};
 `;
