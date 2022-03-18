@@ -1,5 +1,13 @@
 import React from "react";
-import { Message, SystemMessage, FilledForm } from '../event'
+import { Message, SystemMessage, FilledForm, CustomMessage } from '../event'
+
+
+const canParseJsonData = (str) => {
+  try {
+      JSON.parse(str);
+      return true;
+  } catch (e) { return false; }
+}
 
 const ChatMessage = ({ users, message }) => {
   const getChatUser = authorId => users.find(({ id }) => id === authorId) || { type: "customer" };
@@ -8,8 +16,14 @@ const ChatMessage = ({ users, message }) => {
     case "message":
       const user = getChatUser(message.author_id);
 
+      if (!canParseJsonData(message?.text)) {
+        return (
+          <Message key={message.id} message={message} user={user} />
+        );
+      }
+
       return (
-        <Message key={message.id} message={message} user={user} />
+        <CustomMessage key={message.id} message={message} user={user} />
       );
 
     case "system_message":
