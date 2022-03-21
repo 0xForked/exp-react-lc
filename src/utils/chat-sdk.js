@@ -64,3 +64,21 @@ export const pickFromQueue = (chat_id, agent_id) =>
       "ignore_requester_presence": true,
     }
   });
+
+
+export const deactivateChat = (chat_id) =>
+  ChatSDK.methodFactory({
+    action: "deactivate_chat",
+    payload: { 
+      "id": chat_id, 
+      "ignore_requester_presence": true,
+    }
+  });
+
+export const listAgentToTransfer = (chat_id) =>
+  ChatSDK.methodFactory({
+    action: "list_agents_for_transfer",
+    payload: { 
+      "chat_id": chat_id, 
+    }
+  }); 

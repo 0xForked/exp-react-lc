@@ -1,7 +1,7 @@
 import React, { createContext } from 'react'
 import { useAgentDetails } from '../hooks/use-agent-details'
 import { useChatMessages } from '../hooks/use-chat-messages'
-import { getChatsList, getArchives } from '../utils/chat-sdk'
+import { getChatsList, getArchives, listAgentToTransfer } from '../utils/chat-sdk'
 
 export const ChatContext = createContext({})
 
@@ -16,6 +16,7 @@ const ChatProvider = ({ children }) => {
     chatList,
     setChatList,
     activeChat,
+    setDeactivateChat
   } = useChatMessages();
 
   const getActiveChats = async () => {
@@ -50,6 +51,14 @@ const ChatProvider = ({ children }) => {
     }
   }
 
+  const getAgentList = async (chat_id) => {
+    try {
+      return await listAgentToTransfer(chat_id)
+    } catch (error) {
+      console.error(`Unable to fetch agent list: `, error)
+    }
+  }
+
   const getArchivedChats = async () => {
     try {
       const { chats } = await getArchives()
@@ -76,6 +85,8 @@ const ChatProvider = ({ children }) => {
       getActiveChats,
       getQueueChats,
       getArchivedChats,
+      setDeactivateChat,
+      getAgentList
     }}>
       {children}
     </ChatContext.Provider>

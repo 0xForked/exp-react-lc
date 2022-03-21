@@ -1,6 +1,5 @@
-import chatSdk from "@livechat/chat-sdk";
 import { useState, useEffect, useCallback } from "react";
-import { ChatSDK, getChat, pickFromQueue } from "../utils/chat-sdk";
+import { ChatSDK, getChat, pickFromQueue, deactivateChat, listAgentToTransfer } from "../utils/chat-sdk";
 
 const getLastMessages = async (chatInfo) => {
   try {
@@ -33,6 +32,14 @@ export function useChatMessages() {
   const getFromQueue = (chat_id, agent_id) => {
     pickFromQueue(chat_id, agent_id)
   }
+
+  const setDeactivateChat = (chat_id) => {
+    deactivateChat(chat_id)
+  }
+
+ /*  const getListAgentToTransfer = (chat_id) => {
+    listAgentToTransfer(chat_id)
+  } */
 
   const sendMessage = (chatId, value) => {
     ChatSDK.sendMessage(chatId, value);
@@ -167,6 +174,8 @@ export function useChatMessages() {
     chatList,
     setChatList,
     activeChat,
+    setDeactivateChat,
+    // getListAgentToTransfer
   };
 }
 
