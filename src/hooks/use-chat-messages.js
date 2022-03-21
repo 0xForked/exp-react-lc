@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChatSDK, getChat, /* addUserToChat */ } from "../utils/chat-sdk";
+import { ChatSDK, getChat, pickFromQueue } from "../utils/chat-sdk";
 
 const getLastMessages = async (chatInfo) => {
   try {
@@ -29,6 +29,10 @@ export function useChatMessages() {
   const [chatList, setChatList] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
 
+  const getFromQueue = (chat_id, agent_id) => {
+    pickFromQueue(chat_id, agent_id)
+  }
+
   const sendMessage = (chatId, value) => {
     ChatSDK.sendMessage(chatId, value);
   }
@@ -43,23 +47,17 @@ export function useChatMessages() {
     setMessages(events);
   }, [setActiveChat])
 
-  // const pickFromQueue = async (chat_id, user_id, user_type) => {
-  //   try {
-  //     const cb = await addUserToChat(chat_id, user_id, user_type)
-  //     console.log('callback add user')
-  //     console.log(cb)
-  //   } catch(error) {
-  //     console.log(`unable to add user to the chat`)
-  //     console.log(error)
-  //   }
-  // }
-
   /**
    * Handle events related to chat list
    */
   useEffect(() => {
     const handleIncomingChats = ({ payload }) => {
       const incomingChat = payload?.chat;
+
+      console.log('incomming_chat_test', incomingChat.thread.queue)
+      if (incomingChat?.thread?.queue) {
+        return;
+      }
 
       if (!chatList.some(({ id }) => id === incomingChat.id)) {
         if (!chatList.length) {
@@ -95,17 +93,38 @@ export function useChatMessages() {
  */
   useEffect(() => {
     const handleThreads = ({ payload }) => {
+      console.log('from_halde_thread', payload)
+      if (payload?.chat?.thread?.queue) {
+        return;
+      }
+
+      console.log('from_halde_new_message_transfer', payload?.transferred_from)
+      if (payload?.transferred_from) {
+        return;
+      }
+
       if (
         payload?.chat?.id === activeChat?.id &&
         (payload?.chat?.threads?.length ||
           payload?.chat?.thread)
       ) {
         const msgs = payload?.chat?.threads[0]?.events || payload?.chat?.thread?.events;
+       
         setMessages(msgs);
       }
     };
 
     const handleNewMessages = ({ payload }) => {
+      console.log('from_halde_new_message_queue', payload.thread?.queue)
+      if (payload?.thread?.queue) {
+        return;
+      }
+
+      console.log('from_halde_new_message_transfer', payload?.transferred_from)
+      if (payload?.transferred_from) {
+        return;
+      }
+
       if (payload.chat_id === activeChat?.id) {
         const msgs = [...messages, payload.event];
         setMessages(msgs);
@@ -125,7 +144,7 @@ export function useChatMessages() {
 
   return {
     sendMessage,
-    // pickFromQueue,
+    getFromQueue,
     clearMessages,
     setMessages,
     messages,

@@ -7,11 +7,12 @@ export const ChatContext = createContext({})
 
 const ChatProvider = ({ children }) => {
   const { agentDetails } = useAgentDetails();
+
   const {
     fetchMessages,
     messages,
     sendMessage,
-    // pickFromQueue,
+    getFromQueue,
     chatList,
     setChatList,
     activeChat,
@@ -20,6 +21,7 @@ const ChatProvider = ({ children }) => {
   const getActiveChats = async () => {
     try {
       const { chats_summary } = await getChatsList()
+
       const activeChats = chats_summary.filter(chat => chat?.last_thread_summary?.active && !chat?.last_thread_summary?.queue)
 
       setChatList(activeChats);
@@ -35,8 +37,8 @@ const ChatProvider = ({ children }) => {
   const getQueueChats = async () => {
     try {
       const { chats_summary } = await getChatsList()
+      
       const queueChats = chats_summary.filter(chat => chat?.last_thread_summary?.active && chat?.last_thread_summary?.queue)
-      console.log('list_chat_active', queueChats)
 
       setChatList(queueChats);
 
@@ -67,7 +69,7 @@ const ChatProvider = ({ children }) => {
       setChatList,
       messages,
       sendMessage,
-      // pickFromQueue,
+      getFromQueue,
       activeChat,
       fetchMessages,
       agentDetails,

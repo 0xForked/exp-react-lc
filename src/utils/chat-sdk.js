@@ -52,8 +52,15 @@ export const getChatsList = () =>
  * @param {string} user_type 
  * Based on: https://developers.livechat.com/docs/messaging/agent-chat-api/rtm-reference#add-user-to-chat
  */
-// export const addUserToChat = (chat_id, user_id, user_type) =>
-//   ChatSDK.methodFactory({
-//     action: "add_user_to_chat",
-//     payload: { chat_id, user_id, user_type }
-//   });
+export const pickFromQueue = (chat_id, agent_id) =>
+  ChatSDK.methodFactory({
+    action: "transfer_chat",
+    payload: { 
+      "id": chat_id, 
+        "target": {
+          "type": "agent",
+          "ids": [ agent_id ]
+        },
+      "ignore_requester_presence": true,
+    }
+  });
