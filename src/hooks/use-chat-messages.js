@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChatSDK, getChat, pickFromQueue, deactivateChat, listAgentToTransfer } from "../utils/chat-sdk";
+import { ChatSDK, getChat, pickFromQueue, deactivateChat} from "../utils/chat-sdk";
 
 const getLastMessages = async (chatInfo) => {
   try {
@@ -36,10 +36,6 @@ export function useChatMessages() {
   const setDeactivateChat = (chat_id) => {
     deactivateChat(chat_id)
   }
-
- /*  const getListAgentToTransfer = (chat_id) => {
-    listAgentToTransfer(chat_id)
-  } */
 
   const sendMessage = (chatId, value) => {
     ChatSDK.sendMessage(chatId, value);
@@ -175,7 +171,6 @@ export function useChatMessages() {
     setChatList,
     activeChat,
     setDeactivateChat,
-    // getListAgentToTransfer
   };
 }
 
