@@ -15,9 +15,13 @@ const ButtonPickFromQueue = () => {
     const chat = activeChat
     const agent = agentDetails.my_profile;
 
-    await sendMessage(activeChat?.id, `Hello, ${agent?.id} here can I help you?`);
-    await getFromQueue(chat?.id, agent?.id)
-    await getQueueChats()
+    getFromQueue(chat?.id, agent?.id)
+
+    setTimeout(() => {
+      sendMessage(activeChat?.id, `Hello, ${agent?.id} here can I help you?`);
+    }, 3000)
+
+    getQueueChats()
   }
 
   return (

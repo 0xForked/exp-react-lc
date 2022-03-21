@@ -1,3 +1,4 @@
+import chatSdk from "@livechat/chat-sdk";
 import { useState, useEffect, useCallback } from "react";
 import { ChatSDK, getChat, pickFromQueue } from "../utils/chat-sdk";
 
@@ -77,12 +78,19 @@ export function useChatMessages() {
       setActiveChat(null)
     };
 
+    // Listen to chattransferred
+    ChatSDK.on("chat_transferred", () => {
+      console.log('chat_success_transfer')
+    });
     // Listen to incoming chats
     ChatSDK.on("incoming_chat", handleIncomingChats);
     // Listen to closing chats
     ChatSDK.on("chat_deactivated", handleClosingThread);
 
     return () => {
+      ChatSDK.off("chat_transferred", () => {
+        console.log('chat_success_transfer')
+      });
       ChatSDK.off("incoming_chat", handleIncomingChats);
       ChatSDK.off("chat_deactivated", handleClosingThread);
     };
@@ -131,12 +139,19 @@ export function useChatMessages() {
       }
     };
 
-    // Listen to incoming messages
+    // Listen to chattransferred
+    ChatSDK.on("chat_transferred", () => {
+      console.log('chat_success_transfer')
+    });
+    // Listen to incoming chats
     ChatSDK.on("incoming_event", handleNewMessages);
     // Listen to event sent after fetch chat threads
     ChatSDK.on("incoming_chat", handleThreads);
 
     return () => {
+      ChatSDK.off("chat_transferred", () => {
+        console.log('chat_success_transfer')
+      });
       ChatSDK.off("incoming_chat", handleThreads);
       ChatSDK.off("incoming_event", handleNewMessages);
     };
