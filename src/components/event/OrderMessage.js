@@ -102,10 +102,7 @@ const OrderMessage = ({ message, user }) => {
       </MessageAuthor>
       <MessageOrder>
         <MessageOrderImageContainer>
-          <MessageOrderImage 
-          src="https://i.kym-cdn.com/entries/icons/original/000/037/689/article23-1.jpeg" 
-          alt="img-alt" 
-          />
+          <MessageOrderImage src={order.image} alt="img-alt" />
         </MessageOrderImageContainer>
         <MessageOrderDetailContainer>
           <MessageOrderDetailStatus>{order.status}</MessageOrderDetailStatus>

@@ -93,7 +93,7 @@ const ProductMessage = ({ message, user }) => {
       <MessageProductContainer>
         {products?.map(
           product =>
-          <MessageProductItem key={product.name}>
+          <MessageProductItem key={product.id}>
             <MessageProductItemImage src={product.image} alt="img-alt" />
             <MessageProductItemDetail>
               <MessageProductItemName>{product.name}</MessageProductItemName>

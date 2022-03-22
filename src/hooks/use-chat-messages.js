@@ -29,17 +29,11 @@ export function useChatMessages() {
   const [chatList, setChatList] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
 
-  const getFromQueue = (chat_id, agent_id) => {
-    pickFromQueue(chat_id, agent_id)
-  }
+  const getFromQueue = (chat_id, agent_id) => pickFromQueue(chat_id, agent_id)
 
-  const setDeactivateChat = (chat_id) => {
-    deactivateChat(chat_id)
-  }
+  const setDeactivateChat = (chat_id) => deactivateChat(chat_id)
 
-  const sendMessage = (chatId, value) => {
-    ChatSDK.sendMessage(chatId, value);
-  }
+  const sendMessage = (chatId, value) => ChatSDK.sendMessage(chatId, value);
 
   const clearMessages = () => setMessages([])
 
@@ -58,7 +52,6 @@ export function useChatMessages() {
     const handleIncomingChats = ({ payload }) => {
       const incomingChat = payload?.chat;
 
-      console.log('incomming_chat_test', incomingChat.thread.queue)
       if (incomingChat?.thread?.queue) {
         return;
       }
@@ -82,18 +75,14 @@ export function useChatMessages() {
     };
 
     // Listen to chattransferred
-    ChatSDK.on("chat_transferred", () => {
-      console.log('chat_success_transfer')
-    });
+    ChatSDK.on("chat_transferred", () => console.log('chat_success_transfer'));
     // Listen to incoming chats
     ChatSDK.on("incoming_chat", handleIncomingChats);
     // Listen to closing chats
     ChatSDK.on("chat_deactivated", handleClosingThread);
 
     return () => {
-      ChatSDK.off("chat_transferred", () => {
-        console.log('chat_success_transfer')
-      });
+      ChatSDK.off("chat_transferred", () => console.log('chat_success_transfer'));
       ChatSDK.off("incoming_chat", handleIncomingChats);
       ChatSDK.off("chat_deactivated", handleClosingThread);
     };
@@ -109,7 +98,6 @@ export function useChatMessages() {
         return;
       }
 
-      console.log('from_halde_new_message_transfer', payload?.transferred_from)
       if (payload?.transferred_from) {
         return;
       }
@@ -126,12 +114,10 @@ export function useChatMessages() {
     };
 
     const handleNewMessages = ({ payload }) => {
-      console.log('from_halde_new_message_queue', payload.thread?.queue)
       if (payload?.thread?.queue) {
         return;
       }
 
-      console.log('from_halde_new_message_transfer', payload?.transferred_from)
       if (payload?.transferred_from) {
         return;
       }
@@ -143,18 +129,14 @@ export function useChatMessages() {
     };
 
     // Listen to chattransferred
-    ChatSDK.on("chat_transferred", () => {
-      console.log('chat_success_transfer')
-    });
+    ChatSDK.on("chat_transferred", () => console.log('chat_success_transfer'));
     // Listen to incoming chats
     ChatSDK.on("incoming_event", handleNewMessages);
     // Listen to event sent after fetch chat threads
     ChatSDK.on("incoming_chat", handleThreads);
 
     return () => {
-      ChatSDK.off("chat_transferred", () => {
-        console.log('chat_success_transfer')
-      });
+      ChatSDK.off("chat_transferred", () => console.log('chat_success_transfer'));
       ChatSDK.off("incoming_chat", handleThreads);
       ChatSDK.off("incoming_event", handleNewMessages);
     };
