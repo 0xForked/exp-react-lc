@@ -5,7 +5,8 @@ import {
   FilledForm, 
   CustomMessage,
   OrderMessage,
-  ProductMessage
+  ProductMessage,
+  VoiceMessage
 } from '../event'
 
 
@@ -31,6 +32,10 @@ const ChatMessage = ({ users, message }) => {
 
         if (message.content.type === 'product') {
           return <ProductMessage key={message.id} message={message} user={user} />
+        }
+
+        if (message.content.type === 'voice') {
+          return <VoiceMessage key={message.id} message={message} user={user} />
         }
 
         return <div>{JSON.stringify(message.id)}</div>;
