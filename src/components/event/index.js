@@ -4,6 +4,7 @@ import SystemMessage from "./SystemMessage";
 import CustomMessage from "./CustomMessage";
 import OrderMessage from "./OrderMessage";
 import ProductMessage from "./ProductMessage";
+import VoiceMessage from "./VoiceMessage";
 
 export {
   FilledForm,
@@ -11,5 +12,6 @@ export {
   SystemMessage,
   CustomMessage,
   OrderMessage,
-  ProductMessage
+  ProductMessage,
+  VoiceMessage
 }

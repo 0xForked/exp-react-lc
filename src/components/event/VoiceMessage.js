@@ -33,8 +33,7 @@ function formatDate(date) {
 const VoiceMessage = ({ message, user }) => {
     const userName = user?.name || "";
     const isCustomer = user?.type === "customer";
-    const data = message;
-    // const voice = data.content.data
+    const voice = message.content.data
 
     return <MessageWrapper isCustomer={isCustomer}>
         <MessageAuthor>
@@ -42,7 +41,9 @@ const VoiceMessage = ({ message, user }) => {
             <MessageDate>{formatDate(message.created_at)}</MessageDate> 
         </MessageAuthor>
 
-        {/* Message Voice Makrup */}
+        <audio controls>
+          <source src={voice} type="audio/wav" />
+        </audio>
     </MessageWrapper>
 }
 
