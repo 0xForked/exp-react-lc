@@ -6,7 +6,8 @@ import {
   CustomMessage,
   OrderMessage,
   ProductMessage,
-  VoiceMessage
+  VoiceMessage,
+  ImageMessage
 } from '../event'
 
 
@@ -36,6 +37,10 @@ const ChatMessage = ({ users, message }) => {
 
         if (message.content.type === 'voice') {
           return <VoiceMessage key={message.id} message={message} user={user} />
+        }
+          
+        if (message.content.type === 'image') {
+          return <ImageMessage key={message.id} message={message} user={user} />
         }
 
         return <div>{JSON.stringify(message.id)}</div>;
