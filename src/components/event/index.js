@@ -5,7 +5,7 @@ import CustomMessage from "./CustomMessage";
 import OrderMessage from "./OrderMessage";
 import ProductMessage from "./ProductMessage";
 import VoiceMessage from "./VoiceMessage";
-
+import ImageMessage from "./ImageMessage";
 export {
   FilledForm,
   Message,
@@ -13,5 +13,6 @@ export {
   CustomMessage,
   OrderMessage,
   ProductMessage,
-  VoiceMessage
+  VoiceMessage,
+  ImageMessage
 }
