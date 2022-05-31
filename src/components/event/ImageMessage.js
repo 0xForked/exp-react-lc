@@ -41,7 +41,7 @@ const ImageMessage = ({ message, user }) => {
             <MessageDate>{formatDate(message.created_at)}</MessageDate> 
         </MessageAuthor>
 
-        <img src="img" alt="img-msg" />
+        <img src={img} alt="img-msg" />
     </MessageWrapper>
 }
 
