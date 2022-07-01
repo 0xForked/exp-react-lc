@@ -107,7 +107,7 @@ export function useChatMessages() {
         (payload?.chat?.threads?.length ||
           payload?.chat?.thread)
       ) {
-        const msgs = payload?.chat?.threads[0]?.events || payload?.chat?.thread?.events;
+        const msgs = payload?.chat?.threads?.length ? payload?.chat?.threads[0]?.events : payload?.chat?.thread?.events;
        
         setMessages(msgs);
       }
