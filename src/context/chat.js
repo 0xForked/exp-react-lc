@@ -22,8 +22,10 @@ const ChatProvider = ({ children }) => {
   const getActiveChats = async () => {
     try {
       const { chats_summary } = await getChatsList()
-
-      const activeChats = chats_summary.filter(chat => chat?.last_thread_summary?.active && !chat?.last_thread_summary?.queue)
+      
+      const appointmentCustomerId = "9171ae7c-1368-47be-aa29-7a6c66a5e46c"
+      
+      const activeChats = chats_summary.filter(chat => chat?.last_thread_summary?.active && !chat?.last_thread_summary?.queue && chat.users[0].session_fields[0].nadiCustomerId === appointmentCustomerId)
 
       setChatList(activeChats);
 

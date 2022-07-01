@@ -23,6 +23,10 @@ const MessageDate = styled.small`
   margin-left: 3px;
 `;
 
+const Image = styled.img`
+ height: 100px;
+`;
+
 
 function formatDate(date) {
   const createdAt = new Date(date);
@@ -41,7 +45,7 @@ const ImageMessage = ({ message, user }) => {
             <MessageDate>{formatDate(message.created_at)}</MessageDate> 
         </MessageAuthor>
 
-        <img src={img} alt="img-msg" />
+        <Image src={img} alt="img-msg" />
     </MessageWrapper>
 }
 

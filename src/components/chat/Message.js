@@ -43,6 +43,13 @@ const ChatMessage = ({ users, message }) => {
           return <ImageMessage key={message.id} message={message} user={user} />
         }
 
+        if (message.content.type === 'rx') {
+          return <div>
+            <p>{user?.name}</p>
+            <a href={message.content.data.rxURL} target="_blank" rel="noreferrer">Click to Preview RX</a>
+          </div>
+        }
+
         return <div>{JSON.stringify(message.id)}</div>;
       }
 
